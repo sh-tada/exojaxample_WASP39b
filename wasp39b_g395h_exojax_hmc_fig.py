@@ -74,15 +74,9 @@ if __name__ == "__main__":
     art.change_temperature_range(Tlow, Thigh)
 
     ciamols, opa_cias_list = make_opa.opa_cias_list(nu_grid_list)
-    # mols, opa_mols_list, molmass_arr = make_opa.opa_mols_list(
-    #     nu_grid_list, Tlow, Thigh, diffmode=diffmode, save_pickle=False
-    # )
-    with open("../OpaPremodit_dict.bin", "rb") as f:
-        opa_mols_list = pickle.load(f)
-    with open("../mols_list.bin", "rb") as f:
-        mols = pickle.load(f)
-    with open("../molmass_arr.bin", "rb") as f:
-        molmass_arr = pickle.load(f)
+    mols, opa_mols_list, molmass_arr = make_opa.opa_mols_list(
+        nu_grid_list, Tlow, Thigh, diffmode=diffmode, save_pickle=False
+    )
     # mols, opa_mols_list, molmass_arr = make_opa.opa_mols_list_pickle()
 
     def model(params_dict, mols_plot=mols, cia=True, cloud=True):
