@@ -213,15 +213,10 @@ if __name__ == "__main__":
     # mols, opa_mols_list, molmass_arr = make_opa.opa_mols_list_pickle()
 
     def model_c(rp_mean, rp_std):
-        Mp_tmp = numpyro.sample(
-            "Mp_tmp", dist.TruncatedNormal(0, 1, low=-Mp_mean / Mp_std)
-        )
-        Mp = numpyro.deterministic("Mp", Mp_tmp * Mp_std + Mp_mean) * MJ
-        radius_star_tmp = numpyro.sample(
-            "Rs_tmp", dist.TruncatedNormal(0, 1, low=-Rstar_mean / Rstar_std)
-        )
+        Mp = numpyro.sample("Mp", dist.TruncatedNormal(Mp_mean, Mp_std, low=0)) * MJ
         radius_star = (
-            numpyro.deterministic("Rs", radius_star_tmp * Rstar_std + Rstar_mean) * Rs
+            numpyro.sample("Rs", dist.TruncatedNormal(Rstar_mean, Rstar_std, low=0))
+            * Rs
         )
         RV = numpyro.sample("RV", dist.Uniform(-200, 0))
         radius_btm = numpyro.sample("Radius_btm", dist.Uniform(1.0, 1.50)) * RJ
