@@ -51,15 +51,10 @@ if __name__ == "__main__":
     }
     TP_func = TP_dict[TP_model]
 
-    cloud_sample_dict = {
-        "no": cloud_funcs.nocloud_sample,
-        "gray": cloud_funcs.cloud_gray_sample,
-    }
     cloud_dtau_dict = {
         "no": cloud_funcs.nocloud_dtau,
         "gray": cloud_funcs.cloud_gray_dtau,
     }
-    cloud_params_func = cloud_sample_dict[cloud_model]
     cloud_dtau_func = cloud_dtau_dict[cloud_model]
 
     # Wavenumber Grid
